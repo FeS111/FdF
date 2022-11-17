@@ -4,18 +4,19 @@ MAKEFLAGS += --no-builtin-variables
 VPATH = src
 
 # Compiler Variables
-CC		= cc
-CFLAGSS	= -Wall -Wextra -Werror -g
-INCFLAG	= -I include -I printf
-AR		= ar
-ARFLAGS = -rcs
+CC		 = cc
+CFLAGSS	 = -Wall -Wextra -Werror -g
+INCFLAG	 = -I src -I libft
+MLXFLAGS = MLX42/libmlx42.a -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/ -framework Cocoa -framework OpenGL -framework IOKit
+AR		 = ar
+ARFLAGS  = -rcs
 # File Variables
-NAME	= fdf
-SRC		= $(addprefix src/, main.c map.c ft_util.c)
-OBJ		= $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
+NAME	 = fdf
+SRC		 = $(addprefix src/, main.c map.c ft_util.c)
+OBJ		 = $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 
 $(NAME): $(OBJ) | libft/libft.a
-	$(CC) -o $(NAME) $(CFLAGSS) $(INCFLAG) $(OBJ) libft/libft.a
+	$(CC) -o $(NAME) $(CFLAGSS) $(INCFLAG) $(OBJ) libft/libft.a $(MLXFLAGS)
 
 libft/libft.a: libft
 	(cd libft && make && make clean)
