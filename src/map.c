@@ -6,21 +6,31 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:18:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/17 13:54:29 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/17 16:29:58 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
 
-static int	ft_line_count(char **map_lines)
+static int	ft_count(char **arr, int f)
 {
 	int	i;
+	int	count;
 
 	i = 0;
-	while (map_lines[i] != 0)
+	count = 0;
+	while (arr[i] != 0)
+	{
+		if (!ft_strchr(arr[i], ' '))
+			count++;
+		else
+			count += ft_count(ft_split(arr[i], ' '), 1);
 		i++;
-	return (i);
+	}
+	if (f == 1)
+		free(arr);
+	return (count);
 }
 
 static char	*ft_read_map(char *path)
@@ -42,68 +52,55 @@ static char	*ft_read_map(char *path)
 	return (map);
 }
 
-static t_point	**ft_convert_line(char *line, int y)
+static t_point	*ft_convert_to_point(char *col, int x, int y)
 {
-	int		i;
-	t_point	**result;
-	char	**cols;
+	t_point	*result;
 	char	**tmp;
 
-	i = 0;
-	cols = ft_split(line, ' ');
-	result = malloc(sizeof(t_point *) * (ft_line_count(cols)) + 1);
+	result = malloc(sizeof(t_point));
 	if (!result)
 		ft_exit("Allocation failed");
-	while (cols[i] != 0)
-	{
-		tmp = ft_split(cols[i], ',');
-		if (tmp[1] == 0)
-			tmp[1] = NULL;
-		result[i] = ft_new_point(i, y, ft_atoi(tmp[0]), tmp[1]);
-		++i;
-	}
-	result[i] = NULL;
-	ft_free_two_d_char(cols);
+	tmp = ft_split(col, ',');
+	if (tmp[1] == 0)
+		tmp[1] = NULL;
+	result = ft_new_point(x, y, ft_atoi(tmp[0]), tmp[1]);
 	ft_free_two_d_char(tmp);
 	return (result);
 }
 
-void	ft_print_map(t_point ***map)
+static t_point	**ft_allocate_points(char **lines)
 {
-	int	i;
-	int	k;
+	t_point	**points;
 
-	i = 0;
-	while (map[i] != NULL)
-	{
-		k = 0;
-		while (map[i][k] != NULL)
-		{
-			ft_printf("%d,%s\t", map[i][k]->z, map[i][k]->color);
-			k++;
-		}
-		ft_printf("\n");
-		i++;
-	}
+	points = malloc(sizeof(t_point *) * (ft_count(lines, 0) + 1));
+	if (!points)
+		ft_exit("Allocation failed");
+	return (points);
 }
 
-t_point	***ft_parse_map(char *path)
+t_point	**ft_parse_points(char *path, t_point **points)
 {
-	char	**map_lines;
-	t_point	***map;
+	char	**lines;
+	char	**cols;
 	int		i;
+	int		k;
+	int		j;
 
-	map_lines = ft_split(ft_read_map(path), '\n');
-	map = malloc(sizeof(t_point *) * (ft_line_count(map_lines) + 1));
-	if (!map)
-		ft_exit("Allocation failed");
+	lines = ft_split(ft_read_map(path), '\n');
+	points = ft_allocate_points(lines);
 	i = 0;
-	while (map_lines[i] != 0)
+	k = 0;
+	while (lines[i] != 0)
 	{
-		map[i] = ft_convert_line(map_lines[i], i);
+		j = 0;
+		cols = ft_split(lines[i], ' ');
+		while (cols[j] != 0)
+		{
+			points[k++] = ft_convert_to_point(cols[j], j, i);
+			j++;
+		}
 		i++;
 	}
-	map[i] = NULL;
-	ft_free_two_d_char(map_lines);
-	return (map);
+	points[k] = NULL;
+	return (ft_free_two_d_char(lines), ft_free_two_d_char(cols), points);
 }

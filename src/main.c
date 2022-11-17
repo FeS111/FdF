@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:21:39 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/17 13:50:40 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/17 16:30:49 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,21 @@ void	hook(void *param)
 		mlx_close_window(mlx);
 }
 
-
 int	main(int argc, char **argv)
 {
 	mlx_t	*mlx;
-	t_point	***map;
+	t_point	**points;
 
 	if (argc != 2)
 		ft_exit("You need exactly one argument (\"path-to-map.fdf\")");
-	map = ft_parse_map(argv[1]);
-	ft_print_map(map);
+	points = NULL;
+	points = ft_parse_points(argv[1], points);
 	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	if (!mlx)
 		exit(EXIT_FAILURE);
 	mlx_loop_hook(mlx, &hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	ft_free_map(map);
+	ft_free_points(points);
 	return (0);
 }
