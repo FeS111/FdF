@@ -5,14 +5,14 @@ VPATH = src
 
 # Compiler Variables
 CC		 = cc
-CFLAGSS	 = -Wall -Wextra -Werror -g
+# CFLAGSS	 = -Wall -Wextra -Werror -g
 INCFLAG	 = -I src -I libft
 MLXFLAGS = MLX42/libmlx42.a -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/ -framework Cocoa -framework OpenGL -framework IOKit
 AR		 = ar
 ARFLAGS  = -rcs
 # File Variables
 NAME	 = fdf
-SRC		 = $(addprefix src/, main.c map.c ft_util.c)
+SRC		 = $(addprefix src/, main.c map.c ft_util.c ft_draw.c ft_init.c ft_project.c)
 OBJ		 = $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 
 $(NAME): $(OBJ) | libft/libft.a

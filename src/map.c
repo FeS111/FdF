@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:18:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/17 16:29:58 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/21 17:03:47 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static t_point	**ft_allocate_points(char **lines)
 	return (points);
 }
 
-t_point	**ft_parse_points(char *path, t_point **points)
+void	ft_parse_points(char *path, t_options *options)
 {
 	char	**lines;
 	char	**cols;
@@ -87,7 +87,7 @@ t_point	**ft_parse_points(char *path, t_point **points)
 	int		j;
 
 	lines = ft_split(ft_read_map(path), '\n');
-	points = ft_allocate_points(lines);
+	options->points = ft_allocate_points(lines);
 	i = 0;
 	k = 0;
 	while (lines[i] != 0)
@@ -96,11 +96,14 @@ t_point	**ft_parse_points(char *path, t_point **points)
 		cols = ft_split(lines[i], ' ');
 		while (cols[j] != 0)
 		{
-			points[k++] = ft_convert_to_point(cols[j], j, i);
+			options->points[k++] = ft_convert_to_point(cols[j], j, i);
 			j++;
 		}
+		options->points_x = j;
 		i++;
 	}
-	points[k] = NULL;
-	return (ft_free_two_d_char(lines), ft_free_two_d_char(cols), points);
+	options->points_y = i;
+	options->points[k] = NULL;
+	ft_free_two_d_char(lines);
+	ft_free_two_d_char(cols);
 }
