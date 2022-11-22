@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:49:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/22 14:27:13 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/22 16:15:41 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_free_options(t_options *options)
 	free(options->points);
 	free(options->camera);
 	free(options->mouse);
+	free(options->keyboard);
 	free(options);
 }
 
@@ -67,6 +68,7 @@ t_options	*ft_create_options(void)
 		ft_exit("Failed to draw point");
 	o->camera = camera_init(o);
 	o->mouse = mouse_init(o);
+	o->keyboard = keyboard_init(o);
 	return (o);
 }
 

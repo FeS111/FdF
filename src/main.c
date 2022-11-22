@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:21:39 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/22 15:23:16 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/22 16:37:35 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	hook(mlx_key_data_t keydata, void *param)
 	options = (t_options *) param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(options->mlx);
+	ft_draw(options);
 }
 
 void	scroll_hook(double x_delta, double y_delta, void *param)
@@ -33,6 +34,23 @@ void	scroll_hook(double x_delta, double y_delta, void *param)
 	ft_draw(options);
 }
 
+void	check_movement(t_options *o)
+{
+	if (o->keyboard->w)
+		o->camera->y_offset -= 3;
+	if (o->keyboard->s)
+		o->camera->y_offset += 3;
+	if (o->keyboard->a)
+		o->camera->x_offset -= 3;
+	if (o->keyboard->d)
+		o->camera->x_offset += 3;
+	if (o->keyboard->up && o->camera->z_divisor > 1)
+		o->camera->z_divisor -= 1;
+	if (o->keyboard->down)
+		o->camera->z_divisor += 1;
+	ft_draw(o);
+}
+
 void	check_cursor(void *param)
 {
 	t_options	*o;
@@ -45,7 +63,7 @@ void	check_cursor(void *param)
 	mlx_get_mouse_pos(o->mlx, &o->mouse->x, &o->mouse->y);
 	if (o->mouse->is_pressed)
 	{
-		if (o->mouse->control_is_pressed)
+		if (o->keyboard->control)
 			o->camera->gamma += (o->mouse->x - x) * 0.002;
 		else
 		{
@@ -66,10 +84,35 @@ void	loop_hook(void *param)
 	else
 		options->mouse->is_pressed = false;
 	if (mlx_is_key_down(options->mlx, MLX_KEY_LEFT_CONTROL))
-		options->mouse->control_is_pressed = true;
+		options->keyboard->control = true;
 	else
-		options->mouse->control_is_pressed = false;
+		options->keyboard->control = false;
+	if (mlx_is_key_down(options->mlx, MLX_KEY_W))
+		options->keyboard->w = true;
+	else
+		options->keyboard->w = false;
+	if (mlx_is_key_down(options->mlx, MLX_KEY_S))
+		options->keyboard->s = true;
+	else
+		options->keyboard->s = false;
+	if (mlx_is_key_down(options->mlx, MLX_KEY_A))
+		options->keyboard->a = true;
+	else
+		options->keyboard->a = false;
+	if (mlx_is_key_down(options->mlx, MLX_KEY_D))
+		options->keyboard->d = true;
+	else
+		options->keyboard->d = false;
+	if (mlx_is_key_down(options->mlx, MLX_KEY_UP))
+		options->keyboard->up = true;
+	else
+		options->keyboard->up = false;
+	if (mlx_is_key_down(options->mlx, MLX_KEY_DOWN))
+		options->keyboard->down = true;
+	else
+		options->keyboard->down = false;
 	check_cursor(param);
+	check_movement(options);
 }
 
 int	main(int argc, char **argv)

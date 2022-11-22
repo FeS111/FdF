@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:41:55 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/22 15:23:35 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/22 16:26:01 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_camera	*camera_init(t_options *o)
 	camera = (t_camera *) malloc(sizeof(t_camera));
 	if (!camera)
 		ft_exit("Camare init failed");
-	// camera->zoom = fmin(WIDTH / o->points_x / 2, HEIGHT / o->points_y / 2);
 	camera->zoom = 18;
 	camera->alpha = 0;
 	camera->beta = 0;
@@ -42,4 +41,21 @@ t_mouse	*mouse_init(t_options *o)
 	mouse->y = 0;
 	mouse->control_is_pressed = false;
 	return (mouse);
+}
+
+t_keyboard	*keyboard_init(t_options *o)
+{
+	t_keyboard	*keboard;
+
+	keboard = (t_keyboard *) malloc(sizeof(t_keyboard));
+	if (!keboard)
+		ft_exit("Keyboard init failed");
+	keboard->control = false;
+	keboard->w = false;
+	keboard->a = false;
+	keboard->d = false;
+	keboard->s = false;
+	keboard->up = false;
+	keboard->down = false;
+	return (keboard);
 }

@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:17:52 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/22 15:14:30 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/22 16:25:54 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ typedef struct s_camera
 	int					y_offset;
 }	t_camera;
 
+typedef struct s_keyboard
+{
+	bool				control;
+	bool				w;
+	bool				s;
+	bool				a;
+	bool				d;
+	bool				up;
+	bool				down;
+}	t_keyboard;
+
 typedef struct s_mouse
 {
 	bool				is_pressed;
@@ -58,18 +69,21 @@ typedef struct s_options
 	mlx_image_t	*map;
 	t_camera	*camera;
 	t_mouse		*mouse;	
+	t_keyboard	*keyboard;	
 	t_point		**points;
 }	t_options;
 
-void	ft_draw_line(t_options *o, t_point p1, t_point p2);
+void		ft_draw_line(t_options *o, t_point p1, t_point p2);
 
-void	ft_draw(t_options *o);
+void		ft_draw(t_options *o);
 
-void	ft_draw_pixel(t_options *o, int x, int y, uint32_t color);
+void		ft_draw_pixel(t_options *o, int x, int y, uint32_t color);
 
 t_camera	*camera_init(t_options *o);
 
 t_mouse		*mouse_init(t_options *o);
+
+t_keyboard	*keyboard_init(t_options *o);
 
 void		ft_free_two_d_char(char **arr);
 
