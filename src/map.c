@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:18:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/21 17:03:47 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/22 11:35:30 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static t_point	*ft_convert_to_point(char *col, int x, int y)
 	if (tmp[1] == 0)
 		tmp[1] = NULL;
 	result = ft_new_point(x, y, ft_atoi(tmp[0]), tmp[1]);
-	ft_free_two_d_char(tmp);
+	free(tmp[0]);
+	free(tmp);
 	return (result);
 }
 

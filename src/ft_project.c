@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 17:07:55 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/21 18:06:50 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:03:07 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,11 @@ t_point	ft_project(t_point p, t_options *o)
 	p.z *= o->camera->zoom / o->camera->z_divisor;
 	p.x -= (o->points_x * o->camera->zoom) / 2;
 	p.y -= (o->points_y * o->camera->zoom) / 2;
-
 	ft_rotate_x(&p.y, &p.z, o->camera->alpha);
 	ft_rotate_y(&p.x, &p.z, o->camera->beta);
 	ft_rotate_z(&p.x, &p.y, o->camera->gamma);
 	iso(&p.x, &p.y, p.z);
 	p.x += (WIDTH) / 2 + o->camera->x_offset;
-	p.y += (HEIGHT + o->points_y * o->camera->zoom) / 2+ o->camera->y_offset;
-
+	p.y += (HEIGHT + o->points_y * o->camera->zoom) / 2 + o->camera->y_offset;
 	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:49:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/21 17:04:18 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:27:13 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ void	ft_free_two_d_char(char **arr)
 {
 	int	i;
 
-	i = -1;
-	while (arr[i++] != 0)
+	i = 0;
+	while (arr[i] != 0)
+	{
 		free(arr[i]);
+		i++;
+	}
 	free(arr);
 }
 
@@ -35,12 +38,14 @@ void	ft_free_options(t_options *options)
 	i = 0;
 	while (options->points[i] != NULL)
 	{
-		// if (options->points[i]->color != NULL)
-			// free(options->points[i]->color);
+		if (options->points[i]->color != NULL)
+			free(options->points[i]->color);
 		free(options->points[i]);
 		i++;
 	}
 	free(options->points);
+	free(options->camera);
+	free(options->mouse);
 	free(options);
 }
 
@@ -61,6 +66,7 @@ t_options	*ft_create_options(void)
 	if (mlx_image_to_window(o->mlx, o->map, 0, 0) < 0)
 		ft_exit("Failed to draw point");
 	o->camera = camera_init(o);
+	o->mouse = mouse_init(o);
 	return (o);
 }
 
