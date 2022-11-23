@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:17:52 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/22 16:25:54 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/23 14:09:45 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 
 typedef struct s_point
 {
-	int			x;
-	int			y;
-	int			z;
-	char		*color;
+	int						x;
+	int						y;
+	int						z;
+	uint32_t				color;
 }	t_point;
 
 typedef struct s_camera

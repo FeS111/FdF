@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:49:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/22 16:15:41 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/23 18:09:08 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	ft_free_options(t_options *options)
 	i = 0;
 	while (options->points[i] != NULL)
 	{
-		if (options->points[i]->color != NULL)
-			free(options->points[i]->color);
 		free(options->points[i]);
 		i++;
 	}
@@ -80,6 +78,6 @@ t_point	*ft_new_point(int x, int y, int z, char *color)
 	point->x = x;
 	point->y = y;
 	point->z = z;
-	point->color = color;
+	point->color = 0xFFFFFFFF;
 	return (point);
 }
