@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:17:52 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/23 14:09:45 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:03:39 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_point
 	int						x;
 	int						y;
 	int						z;
-	uint32_t				color;
+	u_int32_t				color;
 }	t_point;
 
 typedef struct s_camera
@@ -80,6 +80,8 @@ void		ft_draw(t_options *o);
 void		ft_draw_pixel(t_options *o, int x, int y, uint32_t color);
 
 t_camera	*camera_init(t_options *o);
+
+int			ft_parse_color(char *str);
 
 t_mouse		*mouse_init(t_options *o);
 

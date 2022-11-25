@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:49:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/23 18:09:08 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:04:08 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ t_point	*ft_new_point(int x, int y, int z, char *color)
 	point->x = x;
 	point->y = y;
 	point->z = z;
-	point->color = 0xFFFFFFFF;
+	point->color = ft_parse_color(color);
+	if (color)
+		free(color);
 	return (point);
 }

@@ -6,92 +6,46 @@
 /*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:13:27 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/23 14:29:09 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:03:36 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-size_t	ft_count_digit(unsigned long n, int base)
+static int	ft_hex_to_int(char *hex)
 {
-	size_t	ans;
+	int	val;
+	int	byte;
 
-	if (n <= 0)
-		ans = 1;
-	else
-		ans = 0;
-	while (n)
+	while (*hex)
 	{
-		ans++;
-		n /= base;
+		byte = *hex++;
+		if (byte >= '0' && byte <= '9')
+			byte = byte - '0';
+		else if (byte >= 'a' && byte <= 'f')
+			byte = byte - 'a' + 10;
+		else if (byte >= 'A' && byte <= 'F')
+			byte = byte - 'A' + 10;
+		val = (val << 4) | (byte & 0xF);
 	}
-	return (ans);
+	return (val);
 }
 
-char	*ft_strprefix(char *prefix, char *str)
+static int	ft_get_rgba(int r, int g, int b, int a)
 {
-	char	*res;
-
-	res = ft_strjoin(prefix, str);
-	free(str);
-	return (res);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-char	*ft_ptoa(long n)
+int	ft_parse_color(char *str)
 {
-	char	*d;
+	int	r;
+	int	g;
+	int	b;
 
-	d = ft_itoa_base(n, 1);
-	return (ft_strprefix("0x", d));
+	if (str == NULL)
+		return (0xFFFFFFFF);
+	r = ft_hex_to_int(ft_substr(str, 2, 2));
+	g = ft_hex_to_int(ft_substr(str, 4, 2));
+	b = ft_hex_to_int(ft_substr(str, 6, 2));
+	return (ft_get_rgba(r, g, b, 255));
 }
-
-u_int32_t	ft_parse_color(char *str)
-{
-	size_t		len;
-	char		*itoa;
-	char		*base;
-
-	if (lower == 1)
-		base = "0123456789abcdef";
-	else
-		base = "0123456789ABCDEF";
-	len = ft_count_digit(n, 16);
-	itoa = ft_calloc(len + 1, sizeof(char));
-	if (!itoa)
-		return (NULL);
-	if (n == 0)
-		itoa[0] = '0';
-	if (n < 0)
-	{
-		itoa[0] = '-';
-		n = -n;
-	}
-	while (len-- && n)
-	{
-		itoa[len] = base[n % 16];
-		n /= 16;
-	}
-	return (itoa);
-}
-
-// u_int32_t	ft_parse_color(char *str)
-// {
-// 	static const char	*base1 = "0123456789abcdef";
-// 	static const char	*base2 = "0123456789ABCDEF";
-// 	int					v;
-
-// 	if (str == NULL)
-// 		v = ;
-// 	else
-// 	{
-// 		v = 0;
-// 		str += 3;
-// 		while ((*str >= '0' && *str <= '9') || (*str >= 'a' && *str <= 'f')
-// 			|| (*str >= 'A' && *str <= 'F'))
-// 		{
-// 			v = v * 16 + (ft_stridx(*str >= 'a' ? base1 : base2, *str));
-// 			++str;
-// 		}
-// 	}
-// 	return (v);
-// }

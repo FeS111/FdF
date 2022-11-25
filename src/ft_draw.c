@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:53:33 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/22 14:12:06 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:03:40 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_draw_line(t_options *o, t_point p1, t_point p2)
 	pixel_y = p1.y;
 	while (pixels)
 	{
-		ft_draw_pixel(o, pixel_x, pixel_y, 0xFFFFFFFF);
+		ft_draw_pixel(o, pixel_x, pixel_y, p1.color);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
 		--pixels;
@@ -53,7 +53,7 @@ void	ft_draw(t_options *o)
 	while (o->points[i] != NULL)
 	{
 		ft_draw_pixel(o, ft_project(*o->points[i], o).x,
-			ft_project(*o->points[i], o).y, 0xFFFFFFFF);
+			ft_project(*o->points[i], o).y, o->points[i]->color);
 		if (o->points[i + 1] != NULL && (i + 1) % (o->points_x) != 0)
 			ft_draw_line(o, ft_project(*o->points[i], o),
 				ft_project(*o->points[i + 1], o));
