@@ -13,7 +13,7 @@ AR		 = ar
 ARFLAGS  = -rcs
 # File Variables
 NAME	 = fdf
-SRC		 = $(addprefix src/, main.c map.c ft_util.c ft_draw.c ft_init.c ft_project.c color.c)
+SRC		 = $(addprefix src/, main.c ft_map.c ft_util.c ft_draw.c ft_init.c ft_project.c ft_color.c ft_hooks.c)
 OBJ		 = $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 
 $(NAME): $(OBJ) | libft/libft.a

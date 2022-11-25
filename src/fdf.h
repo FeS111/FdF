@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:17:52 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/25 17:03:39 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:55:01 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ typedef struct s_options
 	t_point		**points;
 }	t_options;
 
+void		ft_loop_hook(void *param);
+
+void		ft_scroll_hook(double x_delta, double y_delta, void *param);
+
 void		ft_draw_line(t_options *o, t_point p1, t_point p2);
 
 void		ft_draw(t_options *o);
@@ -83,15 +87,15 @@ t_camera	*camera_init(t_options *o);
 
 int			ft_parse_color(char *str);
 
-t_mouse		*mouse_init(t_options *o);
+t_mouse		*ft_mouse_init(t_options *o);
 
-t_keyboard	*keyboard_init(t_options *o);
+t_keyboard	*ft_keyboard_init(t_options *o);
 
 void		ft_free_two_d_char(char **arr);
 
 t_point		*ft_new_point(int x, int y, int z, char *color);
 
-t_options	*ft_create_options(void);
+t_options	*ft_init_options(void);
 
 void		ft_exit(char *error);
 
