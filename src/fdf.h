@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:17:52 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/25 20:55:01 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 13:42:10 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # define WIDTH 1024
 # define HEIGHT 1024
 # define MULTI 30
+
+typedef enum s_projection
+{
+	ISO,
+	PARALLE,
+}	t_projection;
 
 typedef struct s_point
 {
@@ -40,6 +46,7 @@ typedef struct s_camera
 	float				z_divisor;
 	int					x_offset;
 	int					y_offset;
+	t_projection		projection;
 }	t_camera;
 
 typedef struct s_keyboard
@@ -72,6 +79,12 @@ typedef struct s_options
 	t_keyboard	*keyboard;	
 	t_point		**points;
 }	t_options;
+
+void		ft_rotate_x(int *y, int *z, double alpha);
+
+void		ft_rotate_y(int *y, int *z, double alpha);
+
+void		ft_rotate_z(int *y, int *z, double alpha);
 
 void		ft_loop_hook(void *param);
 

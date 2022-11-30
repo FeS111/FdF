@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:41:55 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/25 20:55:07 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 13:41:14 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_camera	*camera_init(t_options *o)
 	camera->z_divisor = 4;
 	camera->x_offset = 0;
 	camera->y_offset = 0;
+	camera->projection = ISO;
 	return (camera);
 }
 
@@ -68,7 +69,7 @@ t_options	*ft_init_options(void)
 	o->points = NULL;
 	o->points_x = 0;
 	o->points_y = 0;
-	o->mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
+	o->mlx = mlx_init(WIDTH, HEIGHT, "FDF", false);
 	if (!o->mlx)
 		exit(EXIT_FAILURE);
 	o->map = mlx_new_image(o->mlx, WIDTH, HEIGHT);

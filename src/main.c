@@ -6,12 +6,11 @@
 /*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:21:39 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/25 20:54:47 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 13:33:27 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 int	main(int argc, char **argv)
 {
