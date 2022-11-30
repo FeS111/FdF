@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:18:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/22 11:35:30 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:55:59 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,11 @@ void	ft_parse_points(char *path, t_options *options)
 		j = 0;
 		cols = ft_split(lines[i], ' ');
 		while (cols[j] != 0)
-		{
-			options->points[k++] = ft_convert_to_point(cols[j], j, i);
-			j++;
-		}
+			options->points[k++] = ft_convert_to_point(cols[j], ++j, i);
 		options->points_x = j;
 		i++;
 	}
 	options->points_y = i;
 	options->points[k] = NULL;
-	ft_free_two_d_char(lines);
-	ft_free_two_d_char(cols);
+	return (ft_free_two_d_char(lines), ft_free_two_d_char(cols));
 }
