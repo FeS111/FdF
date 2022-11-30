@@ -1,32 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   ft_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:13:27 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/25 17:03:36 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 16:12:40 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static int	base(int c, int base)
+{
+	char	*str;
+	char	*str2;
+	int		i;
+
+	str = "0123456789abcdef";
+	str2 = "0123456789ABCDEF";
+	i = 0;
+	while (i < base)
+	{
+		if (c == str[i] || c == str2[i])
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 static int	ft_hex_to_int(char *hex)
 {
 	int	val;
-	int	byte;
+	int	i;
 
-	while (*hex)
+	val = 0;
+	i = 0;
+	while (base(hex[i], 16) != -1)
 	{
-		byte = *hex++;
-		if (byte >= '0' && byte <= '9')
-			byte = byte - '0';
-		else if (byte >= 'a' && byte <= 'f')
-			byte = byte - 'a' + 10;
-		else if (byte >= 'A' && byte <= 'F')
-			byte = byte - 'A' + 10;
-		val = (val << 4) | (byte & 0xF);
+		val = val * 16;
+		val += base(hex[i], 16);
+		i++;
 	}
 	return (val);
 }
