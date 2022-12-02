@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:41:34 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/30 13:41:47 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:45:17 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fdf.h"
 
 void	ft_rotate_x(int *y, int *z, double alpha)
 {

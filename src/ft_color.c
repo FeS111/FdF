@@ -6,61 +6,60 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:13:27 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/30 16:12:40 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 16:58:34 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	base(int c, int base)
+static void	rgb_assign(t_rgb *c, int r, int g, int b)
 {
-	char	*str;
-	char	*str2;
-	int		i;
-
-	str = "0123456789abcdef";
-	str2 = "0123456789ABCDEF";
-	i = 0;
-	while (i < base)
-	{
-		if (c == str[i] || c == str2[i])
-			return (i);
-		i++;
-	}
-	return (-1);
+	c->r = r;
+	c->g = g;
+	c->b = b;
 }
 
-static int	ft_hex_to_int(char *hex)
+static void	rgb_region_switch(t_rgb *c, int region, int x)
 {
-	int	val;
-	int	i;
-
-	val = 0;
-	i = 0;
-	while (base(hex[i], 16) != -1)
-	{
-		val = val * 16;
-		val += base(hex[i], 16);
-		i++;
-	}
-	return (val);
+	if (region == 0)
+		rgb_assign(c, 255, x, 0);
+	else if (region == 1)
+		rgb_assign(c, 255 - x, 255, 0);
+	else if (region == 2)
+		rgb_assign(c, 0, 255, x);
+	else if (region == 3)
+		rgb_assign(c, 0, 255 - x, 255);
+	else if (region == 4)
+		rgb_assign(c, x, 0, 255);
+	else if (region == 5)
+		rgb_assign(c, 255, 0, 255 - x);
 }
 
-static int	ft_get_rgba(int r, int g, int b, int a)
+static uint32_t	rgb(double ratio)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	int			normalized;
+	int			region;
+	int			x;
+	t_rgb		*c;
+	uint32_t	clr;		
+
+	normalized = (int)(ratio * 256 * 6);
+	region = normalized / 256;
+	x = normalized % 256;
+	c = make_rgb(0, 0, 0);
+	rgb_region_switch(c, region, x);
+	clr = (c->r << 24) | (c->g << 16) | (c->b << 8) | 255;
+	free(c);
+	return (clr);
 }
 
-int	ft_parse_color(char *str)
+int	assign_color(int z, t_options *o)
 {
-	int	r;
-	int	g;
-	int	b;
+	double		absrange;
+	double		ratio;
+	uint32_t	color;
 
-	if (str == NULL)
-		return (0xFFFFFFFF);
-	r = ft_hex_to_int(ft_substr(str, 2, 2));
-	g = ft_hex_to_int(ft_substr(str, 4, 2));
-	b = ft_hex_to_int(ft_substr(str, 6, 2));
-	return (ft_get_rgba(r, g, b, 255));
+	ratio = ((double)z - (double)o->min) / o->range;
+	color = rgb(ratio);
+	return (color);
 }

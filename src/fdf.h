@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:17:52 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/30 13:42:10 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 17:00:38 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,20 @@ typedef struct s_mouse
 	int32_t				y;
 }	t_mouse;
 
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
 typedef struct s_options
 {
 	int			points_x;
 	int			points_y;
+	int			max;
+	int			range;
+	int			min;
 	mlx_t		*mlx;
 	mlx_image_t	*map;
 	t_camera	*camera;
@@ -79,6 +89,9 @@ typedef struct s_options
 	t_keyboard	*keyboard;	
 	t_point		**points;
 }	t_options;
+
+
+t_rgb		*make_rgb(int r, int g, int b);
 
 void		ft_rotate_x(int *y, int *z, double alpha);
 
@@ -98,7 +111,7 @@ void		ft_draw_pixel(t_options *o, int x, int y, uint32_t color);
 
 t_camera	*camera_init(t_options *o);
 
-int			ft_parse_color(char *str);
+int			assign_color(int z, t_options *o);
 
 t_mouse		*ft_mouse_init(t_options *o);
 
@@ -106,7 +119,7 @@ t_keyboard	*ft_keyboard_init(t_options *o);
 
 void		ft_free_two_d_char(char **arr);
 
-t_point		*ft_new_point(int x, int y, int z, char *color);
+t_point		*ft_new_point(int x, int y, int z, t_options *o);
 
 t_options	*ft_init_options(void);
 

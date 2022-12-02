@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:41:55 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/30 13:41:14 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/11/30 16:54:29 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ t_keyboard	*ft_keyboard_init(t_options *o)
 	return (keboard);
 }
 
+t_rgb	*make_rgb(int r, int g, int b)
+{
+	t_rgb	*rgb;
+
+	rgb = malloc(sizeof(t_rgb));
+	if (!rgb)
+		return (NULL);
+	rgb->r = r;
+	rgb->b = b;
+	rgb->g = g;
+	return (rgb);
+}
+
 t_options	*ft_init_options(void)
 {
 	t_options	*o;
@@ -80,5 +93,7 @@ t_options	*ft_init_options(void)
 	o->camera = camera_init(o);
 	o->mouse = ft_mouse_init(o);
 	o->keyboard = ft_keyboard_init(o);
+	o->max = 0;
+	o->min = 0;
 	return (o);
 }

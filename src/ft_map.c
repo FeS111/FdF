@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:18:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/30 15:55:59 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:35:28 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static char	*ft_read_map(char *path)
 
 	map = ft_strdup("");
 	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		ft_exit("Map file not found!");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -52,7 +54,7 @@ static char	*ft_read_map(char *path)
 	return (map);
 }
 
-static t_point	*ft_convert_to_point(char *col, int x, int y)
+static t_point	*ft_convert_to_point(char *col, int x, int y, t_options *o)
 {
 	t_point	*result;
 	char	**tmp;
@@ -63,9 +65,12 @@ static t_point	*ft_convert_to_point(char *col, int x, int y)
 	tmp = ft_split(col, ',');
 	if (tmp[1] == 0)
 		tmp[1] = NULL;
-	result = ft_new_point(x, y, ft_atoi(tmp[0]), tmp[1]);
-	free(tmp[0]);
-	free(tmp);
+	result = ft_new_point(x, y, ft_atoi(tmp[0]), o);
+	if (result->z > o->max)
+		o->max = result->z;
+	if (result->z < o->min)
+		o->min = result->z;
+	ft_free_two_d_char(tmp);
 	return (result);
 }
 
@@ -79,7 +84,7 @@ static t_point	**ft_allocate_points(char **lines)
 	return (points);
 }
 
-void	ft_parse_points(char *path, t_options *options)
+void	ft_parse_points(char *path, t_options *o)
 {
 	char	**lines;
 	char	**cols;
@@ -88,7 +93,7 @@ void	ft_parse_points(char *path, t_options *options)
 	int		j;
 
 	lines = ft_split(ft_read_map(path), '\n');
-	options->points = ft_allocate_points(lines);
+	o->points = ft_allocate_points(lines);
 	i = 0;
 	k = 0;
 	while (lines[i] != 0)
@@ -96,11 +101,14 @@ void	ft_parse_points(char *path, t_options *options)
 		j = 0;
 		cols = ft_split(lines[i], ' ');
 		while (cols[j] != 0)
-			options->points[k++] = ft_convert_to_point(cols[j], ++j, i);
-		options->points_x = j;
+		{
+			o->points[k++] = ft_convert_to_point(cols[j], j, i, o);
+			j++;
+		}
+		o->points_x = j;
 		i++;
 	}
-	options->points_y = i;
-	options->points[k] = NULL;
-	return (ft_free_two_d_char(lines), ft_free_two_d_char(cols));
+	o->points_y = i;
+	return (o->points[k] = NULL, o->range = abs(o->max - o->min),
+		ft_free_two_d_char(lines), ft_free_two_d_char(cols));
 }
