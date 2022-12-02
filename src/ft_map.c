@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:18:02 by fschmid           #+#    #+#             */
-/*   Updated: 2022/12/02 12:35:28 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:49:44 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static t_point	*ft_convert_to_point(char *col, int x, int y, t_options *o)
 		o->max = result->z;
 	if (result->z < o->min)
 		o->min = result->z;
+	o->range = abs(o->max - o->min);
 	ft_free_two_d_char(tmp);
 	return (result);
 }
@@ -109,6 +110,6 @@ void	ft_parse_points(char *path, t_options *o)
 		i++;
 	}
 	o->points_y = i;
-	return (o->points[k] = NULL, o->range = abs(o->max - o->min),
+	return (o->points[k] = NULL,
 		ft_free_two_d_char(lines), ft_free_two_d_char(cols));
 }
