@@ -6,13 +6,13 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:41:55 by fschmid           #+#    #+#             */
-/*   Updated: 2022/12/06 14:16:05 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 15:41:35 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_camera	*camera_init()
+t_camera	*camera_init(void)
 {
 	t_camera	*camera;
 
@@ -30,7 +30,7 @@ t_camera	*camera_init()
 	return (camera);
 }
 
-static t_mouse	*ft_mouse_init()
+static t_mouse	*ft_mouse_init(void)
 {
 	t_mouse	*mouse;
 
@@ -44,7 +44,7 @@ static t_mouse	*ft_mouse_init()
 	return (mouse);
 }
 
-static t_keyboard	*ft_keyboard_init()
+static t_keyboard	*ft_keyboard_init(void)
 {
 	t_keyboard	*keboard;
 

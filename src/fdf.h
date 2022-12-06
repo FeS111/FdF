@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:17:52 by fschmid           #+#    #+#             */
-/*   Updated: 2022/12/06 14:13:02 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 15:41:06 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ typedef struct s_options
 	t_keyboard	*keyboard;	
 	t_point		**points;
 }	t_options;
-
 
 t_rgb		*make_rgb(int r, int g, int b);
 
