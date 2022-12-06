@@ -19,11 +19,11 @@ OBJ		 = $(addprefix _bin/,$(notdir $(SRC:.c=.o)))
 $(NAME): $(OBJ) | libft/libft.a
 	$(CC) -o $(NAME) $(CFLAGSS) $(INCFLAG) $(OBJ) libft/libft.a $(MLXFLAGS)
 
-libft/libft.a: libft
-	(cd libft && make && make clean)
-
 libft:
 	@if [ ! -d "libft" ]; then git clone https://github.com/fes111/libft.git; fi
+	
+libft/libft.a: libft
+	(cd libft && make && make clean)
 
 _bin :
 	mkdir _bin
