@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 20:46:19 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/25 20:52:08 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 13:42:03 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_scroll_hook(double x_delta, double y_delta, void *param)
 	options = (t_options *) param;
 	if (y_delta > 0)
 		options->camera->zoom += 1;
-	else if (y_delta < 0)
+	else if (y_delta < 0 && options->camera->zoom > 1)
 		options->camera->zoom -= 1;
 	ft_draw(options);
 }
@@ -27,13 +27,13 @@ void	ft_scroll_hook(double x_delta, double y_delta, void *param)
 static void	ft_check_movement(t_options *o)
 {
 	if (o->keyboard->w)
-		o->camera->y_offset -= 3;
+		o->camera->y_offset += (o->points_y / 10) + 1 * (o->camera->zoom / 10);
 	if (o->keyboard->s)
-		o->camera->y_offset += 3;
+		o->camera->y_offset -= (o->points_y / 10) + 1 * (o->camera->zoom / 10);
 	if (o->keyboard->a)
-		o->camera->x_offset -= 3;
+		o->camera->x_offset += (o->points_x / 10) + 1 * (o->camera->zoom / 10);
 	if (o->keyboard->d)
-		o->camera->x_offset += 3;
+		o->camera->x_offset -= (o->points_x / 10) + 1 * (o->camera->zoom / 10);
 	if (o->keyboard->up && o->camera->z_divisor > 1)
 		o->camera->z_divisor -= 1;
 	if (o->keyboard->down)
