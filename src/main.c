@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:21:39 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/30 13:33:27 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:07:39 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	t_options	*o;
-	int			i;
 
 	if (argc != 2)
 		ft_exit("You need exactly one argument (\"path-to-map.fdf\")");

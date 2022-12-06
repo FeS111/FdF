@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hooks.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 20:46:19 by fschmid           #+#    #+#             */
-/*   Updated: 2022/12/06 13:42:03 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:19:26 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_scroll_hook(double x_delta, double y_delta, void *param)
 	t_options	*options;
 
 	options = (t_options *) param;
+	x_delta = 0;
 	if (y_delta > 0)
 		options->camera->zoom += 1;
 	else if (y_delta < 0 && options->camera->zoom > 1)

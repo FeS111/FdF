@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:17:52 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/30 17:00:38 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:13:02 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,7 @@ void		ft_draw(t_options *o);
 
 void		ft_draw_pixel(t_options *o, int x, int y, uint32_t color);
 
-t_camera	*camera_init(t_options *o);
-
 int			assign_color(int z, t_options *o);
-
-t_mouse		*ft_mouse_init(t_options *o);
-
-t_keyboard	*ft_keyboard_init(t_options *o);
 
 void		ft_free_two_d_char(char **arr);
 

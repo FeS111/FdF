@@ -6,13 +6,13 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:41:55 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/30 16:54:29 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:16:05 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_camera	*camera_init(t_options *o)
+t_camera	*camera_init()
 {
 	t_camera	*camera;
 
@@ -30,7 +30,7 @@ t_camera	*camera_init(t_options *o)
 	return (camera);
 }
 
-t_mouse	*ft_mouse_init(t_options *o)
+static t_mouse	*ft_mouse_init()
 {
 	t_mouse	*mouse;
 
@@ -44,7 +44,7 @@ t_mouse	*ft_mouse_init(t_options *o)
 	return (mouse);
 }
 
-t_keyboard	*ft_keyboard_init(t_options *o)
+static t_keyboard	*ft_keyboard_init()
 {
 	t_keyboard	*keboard;
 
@@ -90,9 +90,9 @@ t_options	*ft_init_options(void)
 		ft_exit("Failed to draw point");
 	if (mlx_image_to_window(o->mlx, o->map, 0, 0) < 0)
 		ft_exit("Failed to draw point");
-	o->camera = camera_init(o);
-	o->mouse = ft_mouse_init(o);
-	o->keyboard = ft_keyboard_init(o);
+	o->camera = camera_init();
+	o->mouse = ft_mouse_init();
+	o->keyboard = ft_keyboard_init();
 	o->max = 0;
 	o->min = 0;
 	return (o);

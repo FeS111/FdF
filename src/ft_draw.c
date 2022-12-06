@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fschmid <fschmid@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:53:33 by fschmid           #+#    #+#             */
-/*   Updated: 2022/11/25 17:03:40 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:10:08 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	ft_draw_line(t_options *o, t_point p1, t_point p2)
 
 void	ft_draw_pixel(t_options *o, int x, int y, uint32_t color)
 {
-	if (x < o->map->width && x > 0)
-		if (y < o->map->height && y > 0)
+	if (x < (int) o->map->width && x > 0)
+		if (y < (int) o->map->height && y > 0)
 			mlx_put_pixel(o->map, x, y, color);
 }
 

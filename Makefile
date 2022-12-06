@@ -5,7 +5,7 @@ VPATH = src
 
 # Compiler Variables
 CC		 = cc
-# CFLAGSS	 = -Wall -Wextra -Werror -g
+CFLAGSS	 = -Wall -Wextra -Werror -g
 INCFLAG	 = -I src -I libft
 MLXFLAGS = MLX42/libmlx42.a -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/ -framework Cocoa -framework OpenGL -framework IOKit
 # MLXFLAGS = MLX42/libmlx42_arm.a -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -framework Cocoa -framework OpenGL -framework IOKit

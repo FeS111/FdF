@@ -6,7 +6,7 @@
 /*   By: fschmid <fschmid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:13:27 by fschmid           #+#    #+#             */
-/*   Updated: 2022/12/02 12:49:39 by fschmid          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:17:00 by fschmid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static uint32_t	rgb(double ratio)
 
 int	assign_color(int z, t_options *o)
 {
-	double		absrange;
 	double		ratio;
 	uint32_t	color;
 
